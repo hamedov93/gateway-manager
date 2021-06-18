@@ -1,0 +1,42 @@
+version: "3"
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mongo:
+    driver: local
+
+services:
+
+## Api Node App
+    app:
+      build: ./
+      depends_on:
+        - mongo
+      environment:
+        NODE_ENV: ${NODE_ENV}
+        PORT: ${APP_PORT}
+        TZ: ${TIMEZONE}
+      command: npm run dev
+      ports:
+        - "${APP_PORT}:3000"
+      volumes:
+        - ./:/usr/src/app
+        - /usr/src/app/node_modules
+      networks:
+        - backend
+      restart: always
+
+### MongoDB ##############################################
+    mongo:
+      image: mongo:latest
+      ports:
+        - "27017:27017"
+      volumes:
+        - ./data/mongo/db:/data/db
+        - ./data/mongo/config:/data/configdb
+      networks:
+        - backend
+      restart: unless-stopped

@@ -1,0 +1,32 @@
+{
+  "name": "musala-test",
+  "version": "1.0.0",
+  "description": "Gateway Management Api",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "NODE_ENV=production && node index.js",
+    "test": "NODE_ENV=test jest"
+  },
+  "author": "Mohamed Hamed <mohamedhamed1789@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.14",
+    "mongoose-ip-address": "0.0.6",
+    "morgan": "^1.10.0",
+    "validator": "^13.6.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "jest": "^27.0.4",
+    "nodemon": "^2.0.7"
+  }
+}
