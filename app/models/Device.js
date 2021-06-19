@@ -16,10 +16,12 @@ const DeviceSchema = new mongoose.Schema({
 		type: String,
 		enum: ['online', 'offline'],
 		default: 'online',
+		required: true,
 	},
 	gateway: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Gateway',
+		required: true,
 	},
 }, {
 	timestamps: true,

@@ -2,11 +2,11 @@ const httpStatus = require('http-status');
 const ApiError = require('@app/utils/ApiError');
 
 const createDevice = (req, res, next) => {
-	const { uid, vendor, status } = req.body;
+	const { uid, vendor, status, gateway } = req.body;
 	let message;
 
-	if (!uid || !vendor || !status) {
-		message = 'Please provide all required fields (uid, vendor, status)';
+	if (!uid || !vendor || !status || !gateway) {
+		message = 'Please provide all required fields (uid, vendor, status, gateway)';
 	}
 
 	if (message) {
@@ -18,7 +18,7 @@ const createDevice = (req, res, next) => {
 
 const getDevices = (req, res, next) => {
 	const params = req.query;
-	const allowedParams = ['page', 'limit', 'sortBy', 'gatewayId'];
+	const allowedParams = ['page', 'limit', 'sortBy', 'gateway', 'status', 'device', 'uid'];
 
 	let message;
 

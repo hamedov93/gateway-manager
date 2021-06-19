@@ -59,9 +59,9 @@ class GatewayService {
 	}
 
 	async createDevice(data) {
-		const { gatewayId } = data;
-		const gateway = await Gateway.findById(gatewayId);
-		if (!gateway) {
+		const { gateway } = data;
+		const gatewayDocument = await Gateway.findById(gateway);
+		if (!gatewayDocument) {
 			throw new ApiError(httpStatus.BAD_REQUEST, 'The selected gateway is invalid');
 		}
 
@@ -84,7 +84,16 @@ class GatewayService {
 	}
 
 	async getDevices(filters) {
-		return await Device.paginate({}, {
+		let filter = {};
+		if (filters.gateway) {
+			filter.gateway = filters.gateway;
+		}
+
+		if (filters.status) {
+			filter.status = filters.status;
+		}
+
+		return await Device.paginate(filter, {
 			limit: filters.limit || 10,
 			page: filters.page || 1,
 			sortBy: filters.sortBy || 'createdAt:desc',
