@@ -1,12 +1,36 @@
 const mongoose = require('mongoose');
-const ipAddressPlugin = require('mongoose-ip-address');
+const isIp = require('is-ip');
 
 const GatewaySchema = new mongoose.Schema({
-	serialNumber: String,
-	name: String,
+	serialNumber: {
+		type: String,
+		required: true,
+		trim: true,
+		unique: true,
+	},
+	name: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	ipAddress: {
+		type: String,
+		required: true,
+		trim: true,
+		validate(value) {
+			if (!isIp(value)) {
+				throw new Error('The provided ip address is invalid');
+			}
+		},
+	},
+}, {
+	timestamps: true,
 });
 
-GatewaySchema.plugin(ipAddressPlugin, { fields: ['ipAddress'] });
+GatewaySchema.statics.serialNumberExists = async function(serialNumber, exclude) {
+  const gateway = await this.findOne({ serialNumber, _id: { $ne: exclude } });
+  return !!gateway;
+};
 
 const Gateway = mongoose.model('Gateway', GatewaySchema);
 

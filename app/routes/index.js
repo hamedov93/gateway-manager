@@ -1,11 +1,11 @@
 const express = require('express');
 
-const gatewayRoutes = require('./gatewayRoutes');
-const deviceRoutes = require('./deviceRoutes');
+const gatewayRoutes = require('./gateways');
+const deviceRoutes = require('./devices');
 
 const router = express.Router();
 
 router.use('/gateways', gatewayRoutes);
-router.use('/devices', deviceRoutes);
+// router.use('/devices', deviceRoutes);
 
 module.exports = router;

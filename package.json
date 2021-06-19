@@ -15,11 +15,15 @@
     "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "http-status": "^1.5.0",
+    "is-ip": "^3.1.0",
+    "module-alias": "^2.2.2",
     "mongoose": "^5.12.14",
     "mongoose-ip-address": "0.0.6",
     "morgan": "^1.10.0",
     "validator": "^13.6.0",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "xss-clean": "^0.1.1"
   },
   "devDependencies": {
     "eslint": "^7.28.0",
@@ -28,5 +32,11 @@
     "eslint-plugin-jest": "^24.3.6",
     "jest": "^27.0.4",
     "nodemon": "^2.0.7"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@app": "app",
+    "@models": "app/models",
+    "@services": "app/services"
   }
 }

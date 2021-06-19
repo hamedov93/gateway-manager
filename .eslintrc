@@ -4,7 +4,7 @@
     "jest": true
   },
   "extends": ["airbnb-base", "plugin:jest/recommended"],
-  "plugins": ["jest", "security", "prettier"],
+  "plugins": ["jest"],
   "parserOptions": {
     "ecmaVersion": 2018
   },
@@ -14,6 +14,5 @@
     "no-underscore-dangle": "off",
     "consistent-return": "off",
     "jest/expect-expect": "off",
-    "security/detect-object-injection": "off"
   }
 }
