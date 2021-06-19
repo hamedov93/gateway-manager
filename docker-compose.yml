@@ -3,6 +3,8 @@ version: "3"
 networks:
   backend:
     driver: bridge
+  frontend:
+    driver: bridge
 
 volumes:
   mongo:
@@ -27,6 +29,26 @@ services:
         - /usr/src/app/node_modules
       networks:
         - backend
+      restart: always
+
+## UI
+    ui:
+      build: ./ui
+      depends_on:
+        - app
+      environment:
+        NODE_ENV: ${NODE_ENV}
+        PORT: ${UI_PORT}
+        TZ: ${TIMEZONE}
+      command: npm run dev
+      ports:
+        - "${UI_PORT}:3000"
+      volumes:
+        - ./ui:/usr/src/app
+        - /usr/src/app/node_modules
+      networks:
+        - backend
+        - frontend
       restart: always
 
 ### MongoDB ##############################################
