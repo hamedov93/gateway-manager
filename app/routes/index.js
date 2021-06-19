@@ -6,6 +6,6 @@ const deviceRoutes = require('./devices');
 const router = express.Router();
 
 router.use('/gateways', gatewayRoutes);
-// router.use('/devices', deviceRoutes);
+router.use('/devices', deviceRoutes);
 
 module.exports = router;

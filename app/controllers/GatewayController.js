@@ -3,10 +3,10 @@ const gatewayService = require('@services/GatewayService');
 const catchAsync = require('@app/utils/catchAsync');
 const ApiError = require('@app/utils/ApiError');
 
-const getGateways = async (req, res) => {
+const getGateways = catchAsync(async (req, res) => {
 	const gateways = await gatewayService.getGateways(req.query);
 	res.send(gateways);
-}
+});
 
 const getGateway = catchAsync(async (req, res) => {
 	const id = req.params.id;
