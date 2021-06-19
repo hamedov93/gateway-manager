@@ -19,7 +19,7 @@ const createGateway = (req, res, next) => {
 
 const getGateways = (req, res, next) => {
 	const params = req.query;
-	const allowedParams = ['page', 'limit', 'sortBy'];
+	const allowedParams = ['page', 'limit', 'sortBy', 'name', 'ipAddress', 'serialNumber'];
 
 	let message;
 

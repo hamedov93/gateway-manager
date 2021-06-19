@@ -35,7 +35,9 @@ class GatewayService {
 	}
 
 	async getGateways(filters) {
-		return await Gateway.paginate({}, {
+		const filter = this.extractFilters(filters);
+
+		return await Gateway.paginate(filter, {
 			limit: filters.limit || 10,
 			page: filters.page || 1,
 			sortBy: filters.sortBy || 'createdAt:desc',
@@ -84,14 +86,7 @@ class GatewayService {
 	}
 
 	async getDevices(filters) {
-		let filter = {};
-		if (filters.gateway) {
-			filter.gateway = filters.gateway;
-		}
-
-		if (filters.status) {
-			filter.status = filters.status;
-		}
+		const filter = this.extractFilters(filters);
 
 		return await Device.paginate(filter, {
 			limit: filters.limit || 10,
@@ -114,6 +109,18 @@ class GatewayService {
 		await device.remove();
 
 		return device;
+	}
+
+	extractFilters(data) {
+		const nonFilters = ['limit', 'sortBy', 'page'];
+		const filters = {};
+		for (var key in data) {
+			if (nonFilters.indexOf(key) === -1) {
+				filters[key] = data[key];
+			}
+		}
+
+		return filters;
 	}
 }
 
