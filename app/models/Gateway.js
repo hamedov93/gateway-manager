@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const isIp = require('is-ip');
+const { paginate } = require('./plugins');
 
 const GatewaySchema = new mongoose.Schema({
 	serialNumber: {
@@ -26,6 +27,8 @@ const GatewaySchema = new mongoose.Schema({
 }, {
 	timestamps: true,
 });
+
+GatewaySchema.plugin(paginate);
 
 GatewaySchema.statics.serialNumberExists = async function(serialNumber, exclude) {
   const gateway = await this.findOne({ serialNumber, _id: { $ne: exclude } });

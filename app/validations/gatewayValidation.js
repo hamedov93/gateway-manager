@@ -18,6 +18,23 @@ const createGateway = (req, res, next) => {
 };
 
 const getGateways = (req, res, next) => {
+	const params = req.query;
+	const allowedParams = ['page', 'limit', 'sortBy'];
+
+	let message;
+
+	for (var key in params) {
+		if (allowedParams.indexOf(key) === -1) {
+			message = `${key} param is not allowed`;
+		}
+	}
+
+	// We need to apply more validation to fitlers and pagination params
+
+	if (message) {
+		return next(new ApiError(httpStatus.BAD_REQUEST, message));
+	}
+
 	return next();
 };
 

@@ -4,7 +4,7 @@ const catchAsync = require('@app/utils/catchAsync');
 const ApiError = require('@app/utils/ApiError');
 
 const getGateways = async (req, res) => {
-	const gateways = await gatewayService.getGateways(req.params);
+	const gateways = await gatewayService.getGateways(req.query);
 	res.send(gateways);
 }
 

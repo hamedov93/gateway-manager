@@ -34,7 +34,11 @@ class GatewayService {
 	}
 
 	async getGateways(filters) {
-		return await Gateway.find({});
+		return await Gateway.paginate({}, {
+			limit: filters.limit || 10,
+			page: filters.page || 1,
+			sortBy: filters.sortBy || 'createdAt:desc',
+		});
 	}
 
 	async getGateway(gatewayId) {
@@ -49,7 +53,7 @@ class GatewayService {
 		}
 
 		await gateway.remove();
-		
+
 		return gateway;
 	}
 }
