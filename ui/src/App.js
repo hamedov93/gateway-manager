@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { render } from 'react-dom'
+import { Admin, Resource } from 'react-admin'
+import { httpClient } from './clients/httpClient'
+import restClient from './clients/restClient'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { GatewayList, GatewayCreate, GatewayEdit, GatewayShow, GatewayIcon } from './resources/gateways'
+import { DeviceList, DeviceCreate, DeviceEdit, DeviceIcon } from './resources/devices'
 
-export default App;
+const history = require('history').createBrowserHistory()
+
+const App = () => (
+  <Admin title="Gateway Manager UI" dataProvider={restClient} history={history}>
+    <Resource name="gateways" options={{label:"Gateways"}} list={GatewayList} create={GatewayCreate} edit={GatewayEdit} show={GatewayShow} icon={GatewayIcon} />
+    <Resource name="devices" options={{label:"Devices"}} list={DeviceList} create={DeviceCreate} edit={DeviceEdit} icon={DeviceIcon} />
+  </Admin>
+)
+
+export default App

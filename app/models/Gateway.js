@@ -24,6 +24,12 @@ const GatewaySchema = new mongoose.Schema({
 			}
 		},
 	},
+	id: {
+		type: mongoose.Schema.Types.ObjectId,
+		default: function() {
+			return this._id;
+		},
+	},
 }, {
 	timestamps: true,
 });

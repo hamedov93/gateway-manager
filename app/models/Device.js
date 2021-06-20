@@ -23,6 +23,12 @@ const DeviceSchema = new mongoose.Schema({
 		ref: 'Gateway',
 		required: true,
 	},
+	id: {
+		type: mongoose.Schema.Types.ObjectId,
+		default: function() {
+			return this._id;
+		}
+	},
 }, {
 	timestamps: true,
 });

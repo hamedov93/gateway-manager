@@ -18,7 +18,7 @@ const createDevice = (req, res, next) => {
 
 const getDevices = (req, res, next) => {
 	const params = req.query;
-	const allowedParams = ['page', 'limit', 'sortBy', 'gateway', 'status', 'device', 'uid'];
+	const allowedParams = ['page', 'limit', 'sortBy', 'filter'];
 
 	let message;
 
@@ -28,7 +28,7 @@ const getDevices = (req, res, next) => {
 		}
 	}
 
-	// We need to apply more validation to fitlers and pagination params
+	// We need to apply more validation to filters and pagination params
 
 	if (message) {
 		return next(new ApiError(httpStatus.BAD_REQUEST, message));

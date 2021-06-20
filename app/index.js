@@ -1,6 +1,7 @@
 const express = require('express');
 const xss = require('xss-clean');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const routes = require('@app/routes');
 const { errorConverter, errorHandler } = require('@app/middlewares/error');
@@ -10,6 +11,8 @@ const app = express();
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(xss());
 

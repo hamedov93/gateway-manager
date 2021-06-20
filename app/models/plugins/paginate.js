@@ -36,6 +36,23 @@ const paginate = (schema) => {
     const page = options.page && parseInt(options.page, 10) > 0 ? parseInt(options.page, 10) : 1;
     const skip = (page - 1) * limit;
 
+    if (filter.id && filter.id.constructor === Array) {
+      filter['_id'] = {
+        $in: filter.id,
+      };
+
+      delete filter.id;
+    }
+
+    if (filter.q) {
+      const searchField = schema.paths.name ? 'name' : 'vendor';
+      filter[searchField] = {
+        $regex: `.*${filter.q}.*`,
+      };
+
+      delete filter.q;
+    }
+
     const countPromise = this.countDocuments(filter).exec();
     let docsPromise = this.find(filter).sort(sort).skip(skip).limit(limit);
 
@@ -56,11 +73,11 @@ const paginate = (schema) => {
       const [totalResults, results] = values;
       const totalPages = Math.ceil(totalResults / limit);
       const result = {
-        results,
+        data: results,
         page,
         limit,
         totalPages,
-        totalResults,
+        total: totalResults,
       };
       return Promise.resolve(result);
     });

@@ -40,7 +40,7 @@ services:
         NODE_ENV: ${NODE_ENV}
         PORT: ${UI_PORT}
         TZ: ${TIMEZONE}
-      command: npm run dev
+      command: npm start
       ports:
         - "${UI_PORT}:3000"
       volumes:

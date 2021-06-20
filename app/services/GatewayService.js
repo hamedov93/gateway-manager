@@ -34,13 +34,13 @@ class GatewayService {
 		return gateway;
 	}
 
-	async getGateways(filters) {
-		const filter = this.extractFilters(filters);
+	async getGateways(params) {
+		const filter = params.filter || {};
 
 		return await Gateway.paginate(filter, {
-			limit: filters.limit || 10,
-			page: filters.page || 1,
-			sortBy: filters.sortBy || 'createdAt:desc',
+			limit: params.limit || 10,
+			page: params.page || 1,
+			sortBy: params.sortBy || 'createdAt:desc',
 		});
 	}
 
@@ -67,6 +67,12 @@ class GatewayService {
 			throw new ApiError(httpStatus.BAD_REQUEST, 'The selected gateway is invalid');
 		}
 
+		// Each gateway cannot have more than 10 devices
+		const currentCount = await Device.countDocuments({ gateway }).exec();
+		if (currentCount >= 10) {
+			throw new ApiError(httpStatus.BAD_REQUEST, `${gatewayDocument.name} cannot have more than 10 peripheral devices`);
+		}
+
 		return await Device.create(data);
 	}
 
@@ -85,13 +91,13 @@ class GatewayService {
 		return device;
 	}
 
-	async getDevices(filters) {
-		const filter = this.extractFilters(filters);
+	async getDevices(params) {
+		const filter = params.filter || {};
 
 		return await Device.paginate(filter, {
-			limit: filters.limit || 10,
-			page: filters.page || 1,
-			sortBy: filters.sortBy || 'createdAt:desc',
+			limit: params.limit || 10,
+			page: params.page || 1,
+			sortBy: params.sortBy || 'createdAt:desc',
 		});
 	}
 

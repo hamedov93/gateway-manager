@@ -31,7 +31,7 @@ const updateGateway = catchAsync(async (req, res) => {
 
 const deleteGateway = catchAsync(async (req, res) => {
 	await gatewayService.deleteGateway(req.params.id);
-	res.status(httpStatus.NO_CONTENT).send();
+	res.send({ id: req.params.id });
 });
 
 module.exports = {

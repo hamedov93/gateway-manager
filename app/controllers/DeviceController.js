@@ -31,7 +31,7 @@ const updateDevice = catchAsync(async (req, res) => {
 
 const deleteDevice = catchAsync(async (req, res) => {
 	await gatewayService.deleteDevice(req.params.id);
-	res.status(httpStatus.NO_CONTENT).send();
+	res.send({ id: req.params.id });
 });
 
 module.exports = {
