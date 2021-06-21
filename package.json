@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "NODE_ENV=production && node index.js",
-    "test": "NODE_ENV=test jest"
+    "test": "jest -i --colors --verbose --detectOpenHandles",
+    "jest-clear-cache": "jest --clearCache"
   },
   "author": "Mohamed Hamed <mohamedhamed1789@gmail.com>",
   "license": "ISC",
@@ -31,8 +32,10 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jest": "^24.3.6",
+    "faker": "^5.5.3",
     "jest": "^27.0.4",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.3"
   },
   "_moduleAliases": {
     "@root": ".",

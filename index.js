@@ -5,7 +5,7 @@ const app = require('@app');
 const config = require('@root/config');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://mongo:27017/gateway_manager', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.mongo.url, config.mongo.options);
 
 const db = mongoose.connection;
 
