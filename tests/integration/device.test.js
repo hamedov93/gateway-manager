@@ -30,6 +30,7 @@ describe('Device routes', () => {
     };
   });
 
+  // We may also add tests to check for max number of devices per gateway
   test('should return 201 and successfully create new device if data is ok', async () => {    
 
     const res = await request(app)
@@ -59,6 +60,7 @@ describe('Device routes', () => {
       uid: newUid,
       vendor: 'Microsoft',
       status: 'online',
+      gateway: device.gateway.toString(),
     };
 
     const res = await request(app)
@@ -66,50 +68,47 @@ describe('Device routes', () => {
       .send(newDeviceData)
       .expect(httpStatus.OK);
 
-    // expect(res.body).toMatchObject(newDeviceData);
+    expect(res.body).toMatchObject(newDeviceData);
   });
 
-  // test('should return 200 and successfully fetch gateway details if data is ok', async () => {
-  //   const gateway = new Gateway(newGateway);
-  //   await gateway.save();
+  test('should return 200 and successfully fetch device details if data is ok', async () => {
+    const device = new Device(newDevice);
+    await device.save();
 
-  //   const res = await request(app)
-  //     .get('/gateways/' + gateway._id)
-  //     .send()
-  //     .expect(httpStatus.OK);
+    const res = await request(app)
+      .get('/devices/' + device._id)
+      .send()
+      .expect(httpStatus.OK);
 
-  //   expect(res.body.name).toEqual(gateway.name);
-  //   expect(res.body.serialNumber).toEqual(gateway.serialNumber);
-  //   expect(res.body.ipAddress).toEqual(gateway.ipAddress);
-  //   expect(res.body._id).toBeDefined();
-  //   expect(res.body.createdAt).toBeDefined();
-  //   expect(res.body.updatedAt).toBeDefined();
-  // });
+    expect(res.body).toMatchObject({ ...newDevice, gateway: newDevice.gateway.toString()});
+  });
 
-  // test('should return 200 and successfully delete gateway', async () => {
-  // 	const gateway = new Gateway(newGateway);
-  //   await gateway.save();
+  test('should return 200 and successfully delete delete', async () => {
+  	const device = new Device(newDevice);
+    await device.save();
 
-  //   const res = await request(app)
-  //     .delete('/gateways/' + gateway._id)
-  //     .send()
-  //     .expect(httpStatus.OK);
+    const res = await request(app)
+      .delete('/devices/' + device._id)
+      .send()
+      .expect(httpStatus.OK);
 
-  //   const dbGateway = await Gateway.findById(gateway._id);
-  //   	expect(dbGateway).toEqual(null);
-  // });
+    const dbDevice = await Device.findById(device._id);
+    expect(dbDevice).toEqual(null);
+  });
 
-  // test('should return 200 and successfully fetch gateway list', async () => {
-  // 	await insertGateways([gatewayOne, gatewayTwo]);
+  test('should return 200 and successfully fetch device list', async () => {
+    deviceOne.gateway = gateway._id;
+    deviceTwo.gateway = gateway._id;
+  	await insertDevices([deviceOne, deviceTwo]);
 
-  //   	const res = await request(app)
-  //     	.get('/gateways')
-  //     	.send()
-  //     	.expect(httpStatus.OK);
+    	const res = await request(app)
+      	.get('/devices')
+      	.send()
+      	.expect(httpStatus.OK);
 
-  //    	// We could apply more checks
-  //     expect(res.body.data.length).toEqual(2);
-  // });
+     	// We could apply more checks
+      expect(res.body.data.length).toEqual(2);
+  });
 
-    // TODO: Add more tests for different list filters and pagination params
+  // TODO: Add more tests for different list filters and pagination params
 });
