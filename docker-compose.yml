@@ -16,7 +16,8 @@ services:
       depends_on:
         - mongo
       environment:
-        PORT: ${APP_PORT}
+        PORT: 3000
+        HOST_PORT: ${APP_PORT}
         TZ: ${TIMEZONE}
       command: npm start
       ports:
