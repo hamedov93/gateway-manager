@@ -10,6 +10,14 @@ RUN npm install
 
 COPY ./ ./
 
+# Build ui bundle
+
+WORKDIR /usr/src/app/ui
+COPY ./ui/package*.json ./
+RUN npm install && npm run build
+
+WORKDIR /usr/src/app
+
 EXPOSE 3000
 
-CMD npm run dev
+CMD npm start

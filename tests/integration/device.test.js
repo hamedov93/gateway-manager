@@ -34,7 +34,7 @@ describe('Device routes', () => {
   test('should return 201 and successfully create new device if data is ok', async () => {    
 
     const res = await request(app)
-      .post('/devices')
+      .post('/api/devices')
       .send(newDevice)
       .expect(httpStatus.CREATED);
 
@@ -64,7 +64,7 @@ describe('Device routes', () => {
     };
 
     const res = await request(app)
-      .put('/devices/' + device._id)
+      .put('/api/devices/' + device._id)
       .send(newDeviceData)
       .expect(httpStatus.OK);
 
@@ -76,7 +76,7 @@ describe('Device routes', () => {
     await device.save();
 
     const res = await request(app)
-      .get('/devices/' + device._id)
+      .get('/api/devices/' + device._id)
       .send()
       .expect(httpStatus.OK);
 
@@ -88,7 +88,7 @@ describe('Device routes', () => {
     await device.save();
 
     const res = await request(app)
-      .delete('/devices/' + device._id)
+      .delete('/api/devices/' + device._id)
       .send()
       .expect(httpStatus.OK);
 
@@ -102,7 +102,7 @@ describe('Device routes', () => {
   	await insertDevices([deviceOne, deviceTwo]);
 
     	const res = await request(app)
-      	.get('/devices')
+      	.get('/api/devices')
       	.send()
       	.expect(httpStatus.OK);
 

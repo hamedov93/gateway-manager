@@ -24,7 +24,7 @@ describe('Gateway routes', () => {
       await insertGateways([gatewayOne]);
 
       const res = await request(app)
-        .post('/gateways')
+        .post('/api/gateways')
         .send(newGateway)
         .expect(httpStatus.CREATED);
 
@@ -45,7 +45,7 @@ describe('Gateway routes', () => {
       await gateway.save();
 
       const res = await request(app)
-        .put('/gateways/' + gateway._id)
+        .put('/api/gateways/' + gateway._id)
         .send({
         	name: newGateway.name + ' updated',
         	serialNumber: newGateway.serialNumber,
@@ -61,7 +61,7 @@ describe('Gateway routes', () => {
       await gateway.save();
 
       const res = await request(app)
-        .get('/gateways/' + gateway._id)
+        .get('/api/gateways/' + gateway._id)
         .send()
         .expect(httpStatus.OK);
 
@@ -78,7 +78,7 @@ describe('Gateway routes', () => {
 	    await gateway.save();
 
 	    const res = await request(app)
-	      .delete('/gateways/' + gateway._id)
+	      .delete('/api/gateways/' + gateway._id)
 	      .send()
 	      .expect(httpStatus.OK);
 
@@ -90,7 +90,7 @@ describe('Gateway routes', () => {
     	await insertGateways([gatewayOne, gatewayTwo]);
 
       	const res = await request(app)
-        	.get('/gateways')
+        	.get('/api/gateways')
         	.send()
         	.expect(httpStatus.OK);
 

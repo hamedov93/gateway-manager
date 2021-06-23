@@ -31,8 +31,6 @@ services:
 ### MongoDB ##############################################
     mongo:
       image: mongo:latest
-      ports:
-        - "27017:27017"
       volumes:
         - ./data/mongo/db:/data/db
         - ./data/mongo/config:/data/configdb
