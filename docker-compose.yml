@@ -31,7 +31,6 @@ services:
 
 ### MongoDB ##############################################
     mongo:
-      container_name: gateway-manager-mongo
       image: mongo:latest
       volumes:
         - ./data/mongo/db:/data/db
