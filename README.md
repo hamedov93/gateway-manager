@@ -7,3 +7,6 @@
 - Copy .env.example to .env file and set your timezone and port
 - CD into project root and run docker-compose up -d
 - Browse to localhost:{APP_PORT} to open management ui
+
+## Running the tests
+- docker-compose exec app npm test
