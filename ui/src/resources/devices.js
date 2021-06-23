@@ -10,11 +10,11 @@ import {
 } from 'react-admin'
 
 import Chip from '@material-ui/core/Chip'
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
+import DevicesIcon from '@material-ui/icons/Devices'
 
 import { ucFirst } from '../utils/common'
 
-export const DeviceIcon = MonetizationOnIcon
+export const DeviceIcon = DevicesIcon
 
 const statuses = [
     { id: 'online', name: 'Online' },

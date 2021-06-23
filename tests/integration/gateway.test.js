@@ -1,4 +1,3 @@
-require('module-alias/register');
 const request = require('supertest');
 const faker = require('faker');
 const httpStatus = require('http-status');

@@ -1,4 +1,4 @@
-export const api_url = 'http://localhost:3000'
+export const api_url = 'http://localhost:3000/api'
 
 export const apiUrl = uri => uri ? api_url + '/' + uri : api_url
 

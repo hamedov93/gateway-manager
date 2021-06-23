@@ -3,5 +3,6 @@ node_modules
 
 # Environment varibales
 .env
+!ui/.env
 
 /data/

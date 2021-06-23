@@ -10,16 +10,11 @@ import {
 } from 'react-admin'
 
 import Chip from '@material-ui/core/Chip'
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
+import RouterIcon from '@material-ui/icons/Router'
 
 import { ucFirst } from '../utils/common'
 
-export const GatewayIcon = MonetizationOnIcon
-
-const statuses = [
-    { id: 'done', name: 'Done' },
-    { id: 'pending', name: 'Pending' },
-]
+export const GatewayIcon = RouterIcon
 
 const GatewayFilter = props => (
     <Filter {...props}>
@@ -48,7 +43,6 @@ export const GatewayCreate = props => (
             <TextInput source="name" validate={required()} />
             <TextInput source="serialNumber" validate={required()} />
             <TextInput source="ipAddress" validate={required()} />
-            <SelectInput source="status" choices={statuses} validate={required()} />
         </SimpleForm>
     </Create>
 )
@@ -59,7 +53,6 @@ export const GatewayEdit = props => (
             <TextInput source="name" validate={required()} />
             <TextInput source="serialNumber" validate={required()} />
             <TextInput source="ipAddress" validate={required()} />
-            <SelectInput source="status" choices={statuses} validate={required()} />
         </SimpleForm>
     </Edit>
 )
