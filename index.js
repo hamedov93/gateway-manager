@@ -14,7 +14,7 @@ let server;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('Connected to mongodb');
-  server = app.listen(config.port, () => {
-    console.info(`Nodejs server listening on port ${config.port}`);
+  server = app.listen(3000, () => {
+    console.info(`Nodejs server listening on port 3000`);
   });
 });
